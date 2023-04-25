@@ -23,6 +23,21 @@ public class RadialSpawner : MonoBehaviour
 
 	void Update()
 	{
+		/*
+		GameObject testNearest = null;
+		float minDist = 0;
+		foreach (GameObject o in objs) {
+			if (testNearest == null) {
+				testNearest = o;
+				minDist = Vector3.Distance(player.transform.position, o.transform.position);
+			} else if (Vector3.Distance(player.transform.position, o.transform.position) < minDist) {
+				testNearest = o;
+				minDist = Vector3.Distance(player.transform.position, o.transform.position);
+			}
+		}
+		sphere.transform.position = testNearest.transform.position;
+		*/
+
 		GameObject nearest = kd.FindNearest(player.transform.position);
 		if (nearest != prevNearest) {
 			if (prevNearest != null) {
