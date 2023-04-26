@@ -15,4 +15,5 @@ MonoBehaviour:
   type: 0
   objPrefab: {fileID: 8482687589506376317, guid: 010ab9990dd81944e854056710c4a414, type: 3}
   highlightColor: {r: 1, g: 0, b: 0, a: 1}
-  highlightColorMaterialProperty: _Color
+  baseColor: {r: 0.482, g: 0.302214, b: 0.302214, a: 1}
+  materialColorProperty: _Color

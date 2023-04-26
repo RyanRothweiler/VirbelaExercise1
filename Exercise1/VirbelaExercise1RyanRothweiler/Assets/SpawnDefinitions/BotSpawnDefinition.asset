@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   objPrefab: {fileID: 2620791727486867465, guid: 7f5b7f41acd9d1b4eb543ac280367345, type: 3}
-  highlightColor: {r: 0, g: 0.5838821, b: 1, a: 1}
-  highlightColorMaterialProperty: _Color
+  highlightColor: {r: 0, g: 0.78807735, b: 1, a: 1}
+  baseColor: {r: 0.21954101, g: 0.26390576, b: 0.397, a: 1}
+  materialColorProperty: _Color

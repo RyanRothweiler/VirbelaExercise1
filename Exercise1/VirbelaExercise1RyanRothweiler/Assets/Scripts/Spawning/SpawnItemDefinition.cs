@@ -7,5 +7,6 @@ public class SpawnItemDefinition : ScriptableObject
 	public SpawnType type;
 	public GameObject objPrefab;
 	public Color highlightColor;
-	public string highlightColorMaterialProperty;
+	public Color baseColor;
+	public string materialColorProperty;
 }

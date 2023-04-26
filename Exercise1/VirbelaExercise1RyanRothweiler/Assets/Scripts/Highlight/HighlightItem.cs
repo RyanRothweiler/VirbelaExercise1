@@ -22,6 +22,25 @@ public class HighlightItem : MonoBehaviour
 	{
 		rend = this.GetComponent<Renderer>();
 		def = SpawnManager.GetSpawnItemDefinition(type);
+
+		// A bit more safety. These are required for this to function
+		if (rend == null) {
+			Debug.LogError("Missing required renderer.");
+			this.enabled = false;
+		}
+		if (def == null) {
+			Debug.LogError("Missing required spawn item definition.");
+			this.enabled = false;
+		}
+		if (!rend.material.HasProperty(def.materialColorProperty)) {
+			Debug.LogError($"Material missing required property {def.materialColorProperty}");
+			this.enabled = false;
+		}
+	}
+
+	public void Start()
+	{
+		rend.material.SetColor(def.materialColorProperty, def.baseColor);
 	}
 
 	public void Update()
@@ -32,9 +51,10 @@ public class HighlightItem : MonoBehaviour
 		*/
 		if (isAnimating) {
 
-			// Lerp color
+			// Lerp color.
+			// This creates a new material instance. Which breaks batching. When using the base color switch to using the sharedMaterial and destroy the one created by this.
 			currColor = Color.Lerp(currColor, targetColor, Time.deltaTime * lerpSpeed);
-			rend.material.SetColor(def.highlightColorMaterialProperty, currColor);
+			rend.material.SetColor(def.materialColorProperty, currColor);
 
 			// Check if at end
 			Color dist = currColor - targetColor;
@@ -54,8 +74,8 @@ public class HighlightItem : MonoBehaviour
 		if (rend == null || def == null) { return; }
 
 		// Material has property we need
-		if (!rend.material.HasProperty(def.highlightColorMaterialProperty)) {
-			Debug.LogError($"The material is missing the properties {def.highlightColorMaterialProperty} needed to highlight.");
+		if (!rend.material.HasProperty(def.materialColorProperty)) {
+			Debug.LogError($"The material is missing the properties {def.materialColorProperty} needed to highlight.");
 			return;
 		}
 
@@ -65,7 +85,7 @@ public class HighlightItem : MonoBehaviour
 		if (state) {
 			targetColor = def.highlightColor;
 		} else {
-			targetColor = Color.white;
+			targetColor = def.baseColor;
 		}
 	}
 }
