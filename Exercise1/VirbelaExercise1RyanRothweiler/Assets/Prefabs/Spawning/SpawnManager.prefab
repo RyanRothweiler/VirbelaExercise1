@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e464e5b9af879d54ea04a5357f79796d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnspawnDefinitionsInit:
+  spawnDefinitionsInit:
   - {fileID: 11400000, guid: 194af9200ff674644adb43112b5a03d3, type: 2}
   - {fileID: 11400000, guid: b7b4c708239029745a9f77d6bcdafa21, type: 2}

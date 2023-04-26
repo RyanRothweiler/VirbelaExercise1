@@ -9,7 +9,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-	[SerializeField] private List<SpawnItemDefinition> spawnspawnDefinitionsInit;
+	[SerializeField] private List<SpawnItemDefinition> spawnDefinitionsInit;
 
 	private static Dictionary<SpawnType, SpawnItemDefinition> spawnDefinitions = new Dictionary<SpawnType, SpawnItemDefinition>();
 	private static Dictionary<SpawnType, KDTree> allSpawns = new Dictionary<SpawnType, KDTree>();
@@ -20,11 +20,11 @@ public class SpawnManager : MonoBehaviour
 
 	public void Awake()
 	{
-		for (int i = 0; i < spawnspawnDefinitionsInit.Count; i++) {
-			if (spawnDefinitions.ContainsKey(spawnspawnDefinitionsInit[i].type)) {
+		for (int i = 0; i < spawnDefinitionsInit.Count; i++) {
+			if (spawnDefinitions.ContainsKey(spawnDefinitionsInit[i].type)) {
 				Debug.LogError("Duplicate spawn types. That is not allowed.");
 			} else {
-				spawnDefinitions[spawnspawnDefinitionsInit[i].type] = spawnspawnDefinitionsInit[i];
+				spawnDefinitions[spawnDefinitionsInit[i].type] = spawnDefinitionsInit[i];
 			}
 		}
 	}
@@ -78,31 +78,3 @@ public class SpawnManager : MonoBehaviour
 		return allSpawns[type].FindNearest(origin);
 	}
 }
-
-
-/*
-void Update()
-{
-GameObject testNearest = null;
-float minDist = 0;
-foreach (GameObject o in objs) {
-	if (testNearest == null) {
-		testNearest = o;
-		minDist = Vector3.Distance(player.transform.position, o.transform.position);
-	} else if (Vector3.Distance(player.transform.position, o.transform.position) < minDist) {
-		testNearest = o;
-		minDist = Vector3.Distance(player.transform.position, o.transform.position);
-	}
-}
-sphere.transform.position = testNearest.transform.position;
-
-GameObject nearest = kd.FindNearest(player.transform.position);
-if (nearest != prevNearest) {
-	if (prevNearest != null) {
-		prevNearest.transform.localScale = new Vector3(1, 1, 1);
-	}
-	nearest.transform.localScale = new Vector3(3, 3, 3);
-}
-prevNearest = nearest;
-}
-*/
