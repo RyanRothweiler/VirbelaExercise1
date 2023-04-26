@@ -7,10 +7,18 @@ public class RadialSpawner : MonoBehaviour
 	[SerializeField] private SpawnType type;
 	[SerializeField] private float radius;
 	[SerializeField] private int count;
+	[SerializeField] private KeyCode manualSpawnKey;
 
 	void Start()
 	{
 		Spawn(count);
+	}
+
+	void Update()
+	{
+		if (Input.GetKeyDown(manualSpawnKey)) {
+			Spawn(1);
+		}
 	}
 
 	public void Spawn(int count)
