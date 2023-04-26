@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SpawnType {
+[Serializable] public enum SpawnType {
 	Item, Bot
 };
 
@@ -12,6 +13,10 @@ public class SpawnManager : MonoBehaviour
 
 	private static Dictionary<SpawnType, SpawnItemDefinition> spawnDefinitions = new Dictionary<SpawnType, SpawnItemDefinition>();
 	private static Dictionary<SpawnType, KDTree> allSpawns = new Dictionary<SpawnType, KDTree>();
+
+	// This is somewhat redundant, the kdtree structure could probably be expanded to return a list of all it holds
+	private static List<GameObject> allObjects = new List<GameObject>();
+	public static List<GameObject> GetAllSpawned() { return allObjects; }
 
 	public void Awake()
 	{
@@ -60,6 +65,7 @@ public class SpawnManager : MonoBehaviour
 
 		// Add to kd tree
 		allSpawns[type].Add(newObj);
+		allObjects.Add(newObj);
 	}
 
 	public static GameObject GetNearest(SpawnType type, Vector3 origin)

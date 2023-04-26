@@ -5,6 +5,7 @@ using UnityEngine;
 public class HighlightItem : MonoBehaviour
 {
 	[SerializeField] private SpawnType type;
+	public SpawnType GetSpawnType() { return type; }
 
 	private Renderer rend = null;
 	private SpawnItemDefinition def = null;
