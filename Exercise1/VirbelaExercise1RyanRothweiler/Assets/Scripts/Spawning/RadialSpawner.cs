@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class RadialSpawner : MonoBehaviour
 {
+	[SerializeField] private SpawnType type;
 	[SerializeField] private float radius;
 	[SerializeField] private int count;
-	[SerializeField] private GameObject obj;
 
 	public GameObject player;
 
 	private KDTree kd = new KDTree();
 	private GameObject prevNearest;
 
+
 	void Start()
 	{
-		for (int i = 0; i < count; i++) {
-			GameObject newObj = Instantiate(obj, Random.insideUnitSphere * radius, Quaternion.identity, this.transform);
-			kd.Add(newObj);
-		}
+		Spawn(count);
 	}
 
 	void Update()
@@ -38,6 +36,7 @@ public class RadialSpawner : MonoBehaviour
 		sphere.transform.position = testNearest.transform.position;
 		*/
 
+		/*
 		GameObject nearest = kd.FindNearest(player.transform.position);
 		if (nearest != prevNearest) {
 			if (prevNearest != null) {
@@ -46,5 +45,14 @@ public class RadialSpawner : MonoBehaviour
 			nearest.transform.localScale = new Vector3(3, 3, 3);
 		}
 		prevNearest = nearest;
+		*/
+	}
+
+	public void Spawn(int count)
+	{
+		for (int i = 0; i < count; i++) {
+			Vector3 spawnPos = this.transform.position + (Random.insideUnitSphere * radius);
+			SpawnManager.Spawn(type, spawnPos, this.transform);
+		}
 	}
 }

@@ -84,10 +84,10 @@ public class KDTree
 		KDNode best = Closest(current, possible, origin);
 
 		// Handle other side of tree if its possible a point over there might be closer
-		float bestDist = DistSquared(best.obj.transform.position, origin);
+		float bestCurrentDist = DistSquared(best.obj.transform.position, origin);
 		float bestDistToOther = origin[depth % dimensionsTotal] - current.obj.transform.position[depth % dimensionsTotal];
 
-		if (bestDist > bestDistToOther * bestDistToOther) {
+		if (bestCurrentDist > bestDistToOther * bestDistToOther) {
 			possible = Nearest(other, origin, depth + 1);
 			best = Closest(possible, best, origin);
 		}
@@ -95,12 +95,12 @@ public class KDTree
 		return best;
 	}
 
-	float DistSquared(Vector3 p0, Vector3 p1)
+	float DistSquared(Vector3 a, Vector3 b)
 	{
 		float total = 0;
 
 		for (int i = 0; i < dimensionsTotal; i++) {
-			float diff = Mathf.Abs(p0[i] - p1[i]);
+			float diff = Mathf.Abs(a[i] - b[i]);
 			total += Mathf.Pow(diff, 2);
 		}
 		return total;
