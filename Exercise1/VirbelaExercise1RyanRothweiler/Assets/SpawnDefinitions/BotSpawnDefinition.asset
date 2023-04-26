@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: BotSpawnDefinition
   m_EditorClassIdentifier: 
   type: 1
-  objPrefab: {fileID: 2821988112740141286, guid: 7f5b7f41acd9d1b4eb543ac280367345, type: 3}
+  objPrefab: {fileID: 2620791727486867465, guid: 7f5b7f41acd9d1b4eb543ac280367345, type: 3}
   highlightColor: {r: 0, g: 0.5838821, b: 1, a: 1}
+  highlightColorMaterialProperty: _Color

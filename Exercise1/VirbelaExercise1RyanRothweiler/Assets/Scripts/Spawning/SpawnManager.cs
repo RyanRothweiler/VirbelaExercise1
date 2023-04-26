@@ -35,17 +35,30 @@ public class SpawnManager : MonoBehaviour
 
 	public static void Spawn(SpawnType type, Vector3 pos, Transform parent)
 	{
+		// Does tha type exist
 		if (!spawnDefinitions.ContainsKey(type)) {
-			Debug.LogError($"Unknown spawn item type {type}");
+			Debug.LogError($"Unknown spawn item type {type}.");
 			return;
 		}
 
+		// get definition
 		SpawnItemDefinition def = spawnDefinitions[type];
+
+		// Obj is required
+		if (def.objPrefab == null) {
+			Debug.LogError($"Spawn definition for type {type} missing object prefab.");
+			return;
+		}
+
+		// Instantiate the object
 		GameObject newObj = Instantiate(def.objPrefab, pos, Quaternion.identity, parent);
 
+		// Create kd tree if there isn't one
 		if (!allSpawns.ContainsKey(type)) {
 			allSpawns[type] = new KDTree();
 		}
+
+		// Add to kd tree
 		allSpawns[type].Add(newObj);
 	}
 
@@ -59,3 +72,31 @@ public class SpawnManager : MonoBehaviour
 		return allSpawns[type].FindNearest(origin);
 	}
 }
+
+
+/*
+void Update()
+{
+GameObject testNearest = null;
+float minDist = 0;
+foreach (GameObject o in objs) {
+	if (testNearest == null) {
+		testNearest = o;
+		minDist = Vector3.Distance(player.transform.position, o.transform.position);
+	} else if (Vector3.Distance(player.transform.position, o.transform.position) < minDist) {
+		testNearest = o;
+		minDist = Vector3.Distance(player.transform.position, o.transform.position);
+	}
+}
+sphere.transform.position = testNearest.transform.position;
+
+GameObject nearest = kd.FindNearest(player.transform.position);
+if (nearest != prevNearest) {
+	if (prevNearest != null) {
+		prevNearest.transform.localScale = new Vector3(1, 1, 1);
+	}
+	nearest.transform.localScale = new Vector3(3, 3, 3);
+}
+prevNearest = nearest;
+}
+*/

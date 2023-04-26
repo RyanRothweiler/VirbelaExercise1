@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea53b2d74a6f74245b5799ea99363026, type: 3}
   m_Name: ItemSpawnDefinition
   m_EditorClassIdentifier: 
-  objPrefab: {fileID: 2821988112740141286, guid: 010ab9990dd81944e854056710c4a414, type: 3}
+  type: 0
+  objPrefab: {fileID: 8482687589506376317, guid: 010ab9990dd81944e854056710c4a414, type: 3}
   highlightColor: {r: 1, g: 0, b: 0, a: 1}
+  highlightColorMaterialProperty: _Color
