@@ -2,13 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// This is not a generalized kdtree. This assumes three dimensions. No balancing, etc
+/// <summary>
+/// This is not a generalized kdtree. This assumes three dimensions. No balancing, etc
+/// </summary>
 public class KDTree : IGetNearest
 {
 	private KDNode root = null;
 
 	private const int dimensionsTotal = 3;
 
+	/// <summary>
+	/// Add to the tree
+	/// </summary>
+	/// <param name="obj">Object adding to the tree.</param>
 	public void Add(GameObject obj)
 	{
 		KDNode n = new KDNode();
@@ -16,7 +22,11 @@ public class KDTree : IGetNearest
 		Add(n);
 	}
 
-	public void Add(KDNode newNode)
+	/// <summary>
+	/// Add a new node to the tree
+	/// </summary>
+	/// <param name="newNode">New node adding to the tree</param>
+	private void Add(KDNode newNode)
 	{
 		// validation
 		if (newNode.obj == null) {
@@ -61,11 +71,27 @@ public class KDTree : IGetNearest
 		}
 	}
 
+	/// <summary>
+	/// Gets the nearest GameObject to a point
+	/// </summary>
+	/// <returns>
+	/// The GameObject that is nearest
+	/// </returns>
+	/// <param name="origin">The point of which to get nearest for.</param>
 	public GameObject FindNearest(Vector3 origin)
 	{
 		return Nearest(root, origin, 0).obj;
 	}
 
+	/// <summary>
+	/// Gets the nearest KDNode to a point. This is recursive.
+	/// </summary>
+	/// <returns>
+	/// The KDNode that is nearest
+	/// </returns>
+	/// <param name="current">Current node in the recursion.</param>
+	/// <param name="depth">Current depth of the recursion. Used to get the correct dimension.</param>
+	/// <param name="origin">The point of which to get nearest for.</param>
 	private KDNode Nearest(KDNode current, Vector3 origin, int depth)
 	{
 		if (current == null) { return null; }
@@ -95,6 +121,14 @@ public class KDTree : IGetNearest
 		return best;
 	}
 
+	/// <summary>
+	/// Gets distance squared. Doesn't sqrt.
+	/// </summary>
+	/// <returns>
+	/// The distance squared without sqrt.
+	/// </returns>
+	/// <param name="a">The first point in the distance</param>
+	/// <param name="b">The second point in the distance</param>
 	float DistSquared(Vector3 a, Vector3 b)
 	{
 		float total = 0;
@@ -106,6 +140,14 @@ public class KDTree : IGetNearest
 		return total;
 	}
 
+	/// <summary>
+	/// Gets distance squared. Doesn't sqrt.
+	/// </summary>
+	/// <returns>
+	/// The distance squared without sqrt.
+	/// </returns>
+	/// <param name="a">The first point in the distance</param>
+	/// <param name="b">The second point in the distance</param>
 	private KDNode Closest(KDNode current, KDNode possible, Vector3 origin)
 	{
 		if (possible == null) { return current; }
