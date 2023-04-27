@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable] public enum SpawnType {
-	Item, Bot
+	Item, Bot,
 };
 
 public class SpawnManager : MonoBehaviour
@@ -40,7 +40,7 @@ public class SpawnManager : MonoBehaviour
 
 	public static void Spawn(SpawnType type, Vector3 pos, Transform parent)
 	{
-		// Does tha type exist
+		// Does that type exist
 		if (!spawnDefinitions.ContainsKey(type)) {
 			Debug.LogError($"Unknown spawn item type {type}.");
 			return;
