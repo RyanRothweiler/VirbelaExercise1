@@ -9,6 +9,10 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+	// This would be injected by a framework
+	//private static IGetNearestBuilder nearestBuilder = new NearestBuilderSlow();
+	private static IGetNearestBuilder nearestBuilder = new NearestBuilderKD();
+
 	[SerializeField] private List<SpawnItemDefinition> spawnDefinitionsInit;
 
 	private static Dictionary<SpawnType, SpawnItemDefinition> spawnDefinitions = new Dictionary<SpawnType, SpawnItemDefinition>();
@@ -58,13 +62,12 @@ public class SpawnManager : MonoBehaviour
 		// Instantiate the object
 		GameObject newObj = Instantiate(def.objPrefab, pos, Quaternion.identity, parent);
 
-		// Create kd tree if there isn't one
+		// Create storage if there isn't one
 		if (!allSpawns.ContainsKey(type)) {
-			//allSpawns[type] = new KDTree();
-			allSpawns[type] = new GetNearestSlow();
+			allSpawns[type] = nearestBuilder.BuildImplementation();
 		}
 
-		// Add to kd tree
+		// Add to storage
 		allSpawns[type].Add(newObj);
 		allObjects.Add(newObj);
 	}
