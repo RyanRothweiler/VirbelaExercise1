@@ -7,6 +7,9 @@ using UnityEngine;
 	Item, Bot,
 };
 
+/// <summary>
+/// Handles spawning based on spawn types, and organizes them into datastructures
+/// </summary>
 public class SpawnManager : MonoBehaviour
 {
 	// This would be injected by a framework
@@ -33,11 +36,23 @@ public class SpawnManager : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Adds a new spawn definition to the spawnDefinitions dictionary.
+	/// </summary>
+	/// <param name="def">The spawn definition to be added.</param>
 	public static void AddSpawnDefinition(SpawnItemDefinition def)
 	{
 		spawnDefinitions[def.type] = def;
 	}
 
+	/// <summary>
+	/// Returns the SpawnItemDefinition for the given SpawnType.
+	/// </summary>
+	/// <param name="type">The SpawnType to get the definition for.</param>
+	/// <returns>The SpawnItemDefinition for the given SpawnType.</returns>
+	/// <remarks>
+	/// If the SpawnType is not found in the spawnDefinitions dictionary, a debug error message will be logged and null will be returned.
+	/// </remarks>
 	public static SpawnItemDefinition GetSpawnItemDefinition(SpawnType type)
 	{
 		if (!spawnDefinitions.ContainsKey(type)) {
@@ -47,6 +62,12 @@ public class SpawnManager : MonoBehaviour
 		return spawnDefinitions[type];
 	}
 
+	/// <summary>
+	/// Spawns a new object of the specified type at the specified position, and adds it to the list of all spawned objects of that type.
+	/// </summary>
+	/// <param name="type">The type of object to spawn.</param>
+	/// <param name="pos">The position at which to spawn the object.</param>
+	/// <param name="parent">The parent transform under which to place the object.</param>
 	public static void Spawn(SpawnType type, Vector3 pos, Transform parent)
 	{
 		// Does that type exist
@@ -77,6 +98,12 @@ public class SpawnManager : MonoBehaviour
 		allObjects.Add(newObj);
 	}
 
+	/// <summary>
+	/// Gets the nearest spawned object of the specified SpawnType to the specified origin position.
+	/// </summary>
+	/// <param name="type">The SpawnType to search for.</param>
+	/// <param name="origin">The position to search from.</param>
+	/// <returns>The nearest spawned object of the specified SpawnType, or null if none exist.</returns>
 	public static GameObject GetNearest(SpawnType type, Vector3 origin)
 	{
 		if (!allSpawns.ContainsKey(type)) {
