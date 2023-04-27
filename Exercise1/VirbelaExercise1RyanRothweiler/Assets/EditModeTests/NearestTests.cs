@@ -21,8 +21,6 @@ public class NearestTests
 		impl.Add(objTwo);
 		impl.Add(objThree);
 
-		GameObject nearest = null;
-
 		Debug.Assert(impl.FindNearest(new Vector3(0, 99, 0)) == objThree);
 		Debug.Assert(impl.FindNearest(new Vector3(0, 0, 0)) == objTwo);
 		Debug.Assert(impl.FindNearest(new Vector3(0, 200, 0)) == objThree);

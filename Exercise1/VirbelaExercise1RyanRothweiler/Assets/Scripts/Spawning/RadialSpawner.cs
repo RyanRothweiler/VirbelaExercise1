@@ -5,9 +5,14 @@ using UnityEngine;
 public class RadialSpawner : MonoBehaviour
 {
 	[SerializeField] private SpawnType type;
+	public void SetType(SpawnType type) { this.type = type; }
+
 	[SerializeField] private float radius;
+	public void SetRadius(float radius) { this.radius = radius; }
+
 	[SerializeField] private int count;
 	[SerializeField] private KeyCode manualSpawnKey;
+
 
 	void Start()
 	{

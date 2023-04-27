@@ -33,6 +33,11 @@ public class SpawnManager : MonoBehaviour
 		}
 	}
 
+	public static void AddSpawnDefinition(SpawnItemDefinition def)
+	{
+		spawnDefinitions[def.type] = def;
+	}
+
 	public static SpawnItemDefinition GetSpawnItemDefinition(SpawnType type)
 	{
 		if (!spawnDefinitions.ContainsKey(type)) {
