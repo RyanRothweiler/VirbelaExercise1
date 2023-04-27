@@ -4,8 +4,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class responsible for managing game saves.
+/// </summary>
 public class SaveManager : MonoBehaviour
 {
+	/// <summary>
+	/// Class representing a saved spawn item.
+	/// </summary>
 	[Serializable] private class SpawnItemSave
 	{
 		public SpawnType type;
@@ -18,6 +24,9 @@ public class SaveManager : MonoBehaviour
 		}
 	};
 
+	/// <summary>
+	/// Class representing the structure of a save file.
+	/// </summary>
 	[Serializable] private class SaveFile
 	{
 		public Vector3 playerPos;
@@ -42,6 +51,9 @@ public class SaveManager : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Saves the game state to a file.
+	/// </summary>
 	static void Save()
 	{
 		// Fill out structure
@@ -71,6 +83,9 @@ public class SaveManager : MonoBehaviour
 		Debug.Log($"Save file {filePath}");
 	}
 
+	/// <summary>
+	/// Loads the game state from a file.
+	/// </summary>
 	static void Load()
 	{
 		if (File.Exists(filePath)) {
@@ -91,6 +106,9 @@ public class SaveManager : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Triggers the game to save its state.
+	/// </summary>
 	public static void TriggerSave()
 	{
 		Save();
