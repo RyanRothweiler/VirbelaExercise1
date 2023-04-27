@@ -48,7 +48,7 @@ public class HighlightItem : MonoBehaviour
 	{
 		/*
 		 lerp the color. There are other lerp methods that maybe avoid using Update functions or target subtraction.
-		 But this method always feels the best, is super simple, and is easily readable, easily change-able, and easily understood. So I prefer this.
+		 But this method always feels the best, is super simple, is easily readable, easily change-able, and easily understood. So I prefer this.
 		*/
 		if (isAnimating) {
 

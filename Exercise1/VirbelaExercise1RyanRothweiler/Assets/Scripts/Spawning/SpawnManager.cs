@@ -12,7 +12,7 @@ public class SpawnManager : MonoBehaviour
 	[SerializeField] private List<SpawnItemDefinition> spawnDefinitionsInit;
 
 	private static Dictionary<SpawnType, SpawnItemDefinition> spawnDefinitions = new Dictionary<SpawnType, SpawnItemDefinition>();
-	private static Dictionary<SpawnType, KDTree> allSpawns = new Dictionary<SpawnType, KDTree>();
+	private static Dictionary<SpawnType, IGetNearest> allSpawns = new Dictionary<SpawnType, IGetNearest>();
 
 	// This is somewhat redundant, the kdtree structure could probably be expanded to return a list of all it holds
 	private static List<GameObject> allObjects = new List<GameObject>();

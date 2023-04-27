@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // This is not a generalized kdtree. This assumes three dimensions. No balancing, etc
-public class KDTree
+public class KDTree : IGetNearest
 {
 	private KDNode root = null;
 
