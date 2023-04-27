@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Tag an item for highlighting.
+/// <summary>
+/// Tag an item for highlighting.
+/// Animates the highlight color
+/// </summary>
 public class HighlightItem : MonoBehaviour
 {
 	[SerializeField] private SpawnType type;
@@ -12,10 +17,11 @@ public class HighlightItem : MonoBehaviour
 
 	private bool isAnimating = false;
 	private Color targetColor;
-	private Color currColor = Color.white;
+	private Color currColor;
 
 	// Stop animating when the target is close enough.
 	private const float closeEnough = 0.01f;
+	// Speed of animation
 	private const float lerpSpeed = 25f;
 
 	// Do in awake so that other behaviors can use this. Also good practice to get components in awake
@@ -70,6 +76,11 @@ public class HighlightItem : MonoBehaviour
 		}
 	}
 
+	// Sets the highlight state.
+	/// <summary>
+	/// Sets the highlight state to either highlighted or not.
+	/// </summary>
+	/// <param name="state">Is highlighted or not.</param>
 	public void SetHighlight(bool state)
 	{
 		// Have things we need

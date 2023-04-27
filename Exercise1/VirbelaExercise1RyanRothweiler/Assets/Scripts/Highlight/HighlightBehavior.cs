@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Highlights the nearest HighlightItem in SpawnManager
+/// <summary>
+/// Highlights the nearest HighlightItem in SpawnManager.
+/// Only runs when new objects are spawned or when this gameobject moves
+/// </summary>
 public class HighlightBehavior : MonoBehaviour
 {
 	public SpawnType typeHighlighting;
@@ -26,6 +31,10 @@ public class HighlightBehavior : MonoBehaviour
 		}
 	}
 
+	// Highlights the nearest HighlightItem in SpawnManager
+	/// <summary>
+	/// Highlights the nearest HighlightItem in SpawnManager
+	/// </summary>
 	void HighlightNearest()
 	{
 		countSeen = SpawnManager.GetAllSpawned().Count;
