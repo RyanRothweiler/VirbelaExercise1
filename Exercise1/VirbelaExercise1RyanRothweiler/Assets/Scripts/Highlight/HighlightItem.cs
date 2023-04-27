@@ -42,6 +42,7 @@ public class HighlightItem : MonoBehaviour
 	public void Start()
 	{
 		rend.material.SetColor(def.materialColorProperty, def.baseColor);
+		currColor = def.baseColor;
 	}
 
 	public void Update()

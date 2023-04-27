@@ -60,7 +60,8 @@ public class SpawnManager : MonoBehaviour
 
 		// Create kd tree if there isn't one
 		if (!allSpawns.ContainsKey(type)) {
-			allSpawns[type] = new KDTree();
+			//allSpawns[type] = new KDTree();
+			allSpawns[type] = new GetNearestSlow();
 		}
 
 		// Add to kd tree
