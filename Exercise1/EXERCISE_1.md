@@ -1,10 +1,10 @@
 # Information and Usage
 - All optional challenges implemented.
 - Project is in 2020.3.47f1
-- Playmode and Edit mode test are included.
+- Playmode and Edit mode tests are included.
 - Save file
 	- Press S during gameplay to save. 
-	- Save file is written to C:\Users\{user}\AppData\LocalLow\DefaultCompany\VirbelaExercise1RyanRothweiler
+	- Save file is written to C:\Users\user\AppData\LocalLow\DefaultCompany\VirbelaExercise1RyanRothweiler
 	- Save file will be automatically loaded on start, if it exists. Delete file to prevent it from loading.
 	- Save file will save and load all HighlightItems. Even ones placed manually in the scene. This can result in duplicating objects if they're not deleted before loading. This is an improvement that could be made to the save system.
 - There are four radial spawners in the scene. 
@@ -77,7 +77,7 @@ Allow the designer to choose the base color and highlight color for Items/Bots a
 ## Questions ##
 
  1. How can your implementation be optimized?
-	- A KD tree datastructure is already quite fast , I'm not aware of other faster structures but I'm sure they exist. The KD implementation could be improved by adding balancing, and starting by inserting the center most point. Most of the optimization will be in reducing the set of points searched using other context. For example if the game has rooms then only search the points within the same room as the player. 
+	- A KD tree datastructure is already quite fast, I'm not aware of other faster structures but I'm sure they exist. The KD implementation could be improved by adding balancing, and starting by inserting the center most point. Most of the optimization will be in reducing the set of points searched using other context. For example if the game has rooms then only search the points within the same room as the player. 
  2. How much time did you spend on your implementation?
 	 -  Total of 11.5 hours currently, as of writing. Likely another 0.5 hours to finish this documentation.
 		 - 2.5 hours for the nearest nighbor implementations of naive and KD tree.
@@ -89,7 +89,7 @@ Allow the designer to choose the base color and highlight color for Items/Bots a
  3. What was most challenging for you?
 	 - The dependency injection. Its not something I'm very familiar with. I'm aware of it, but haven't used it in practice besides tinkering.
  4. What else would you add to this exercise?
-	 1. Possibly additional gameplay. Additions like collisions, scene changes, player input, and prefab setup might give additional insight.
+	 - Possibly additional gameplay. Additions like collisions, scene changes, player input, and prefab setup might give additional insight.
 
 ## Optional ##
 
