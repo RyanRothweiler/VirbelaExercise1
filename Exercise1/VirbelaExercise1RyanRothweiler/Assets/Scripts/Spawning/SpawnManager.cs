@@ -19,7 +19,9 @@ public class SpawnManager : MonoBehaviour
 	[SerializeField] private List<SpawnItemDefinition> spawnDefinitionsInit;
 
 	private static Dictionary<SpawnType, SpawnItemDefinition> spawnDefinitions = new Dictionary<SpawnType, SpawnItemDefinition>();
-	private static Dictionary<SpawnType, IGetNearest> allSpawns = new Dictionary<SpawnType, IGetNearest>();
+	private static Dictionary<SpawnType, IGetNearest> spawnsByType = new Dictionary<SpawnType, IGetNearest>();
+	private static IGetNearest allSpawns = null;
+
 
 	// This is somewhat redundant, the kdtree structure could probably be expanded to return a list of all it holds
 	private static List<GameObject> allObjects = new List<GameObject>();
@@ -107,12 +109,28 @@ public class SpawnManager : MonoBehaviour
 	/// <returns>The nearest spawned object of the specified SpawnType, or null if none exist.</returns>
 	public static GameObject GetNearest(SpawnType type, Vector3 origin)
 	{
-		if (!allSpawns.ContainsKey(type)) {
+		if (!spawnsByType.ContainsKey(type)) {
 			// Not logging erroring here. This will happen if a SpawnType has 0 spawns, which isn't necessarily an error.
 			return null;
 		}
 
-		return allSpawns[type].FindNearest(origin);
+		return spawnsByType[type].FindNearest(origin);
+	}
+
+	/// <summary>
+	/// Gets the nearest spawned object of the specified SpawnType to the specified origin position.
+	/// </summary>
+	/// <param name="type">The SpawnType to search for.</param>
+	/// <param name="origin">The position to search from.</param>
+	/// <returns>The nearest spawned object of the specified SpawnType, or null if none exist.</returns>
+	public static GameObject GetNearestAll(Vector3 origin)
+	{
+		if (allSpawns == null) {
+			// Not always an error. Will happen if there are 0 spawns.
+			return null;
+		}
+
+		return allSpawns.FindNearest(origin);
 	}
 
 	/// <summary>
@@ -124,12 +142,16 @@ public class SpawnManager : MonoBehaviour
 	private static void AddObject(GameObject obj, SpawnType type)
 	{
 		// Create storage if there isn't one
-		if (!allSpawns.ContainsKey(type)) {
-			allSpawns[type] = nearestBuilder.BuildImplementation();
+		if (!spawnsByType.ContainsKey(type)) {
+			spawnsByType[type] = nearestBuilder.BuildImplementation();
+		}
+		if (allSpawns == null) {
+			allSpawns = nearestBuilder.BuildImplementation();
 		}
 
 		// Add to storage
-		allSpawns[type].Add(obj);
+		allSpawns.Add(obj);
+		spawnsByType[type].Add(obj);
 		allObjects.Add(obj);
 	}
 }

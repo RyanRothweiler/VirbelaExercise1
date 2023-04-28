@@ -2,23 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Highlights the nearest HighlightItem in SpawnManager
-/// <summary>
-/// Highlights the nearest HighlightItem in SpawnManager.
-/// Only runs when new objects are spawned or when this gameobject moves
-/// </summary>
-public class HighlightBehavior : MonoBehaviour
+public abstract class HighlightBehaviorBase : MonoBehaviour
 {
-	public SpawnType typeHighlighting;
-
 	private Vector3 prevPos;
-	private HighlightItem prevNearest;
-
 	private int countSeen;
+
+	protected HighlightItem prevNearest;
 
 	void Start()
 	{
-		HighlightNearest();
+		Highlight();
 	}
 
 	void Update()
@@ -27,15 +20,11 @@ public class HighlightBehavior : MonoBehaviour
 		    prevPos != this.transform.position ||
 		    SpawnManager.GetAllSpawned().Count != countSeen
 		) {
-			HighlightNearest();
+			Highlight();
 		}
 	}
 
-	// Highlights the nearest HighlightItem in SpawnManager
-	/// <summary>
-	/// Highlights the nearest HighlightItem in SpawnManager
-	/// </summary>
-	void HighlightNearest()
+	public void Highlight()
 	{
 		countSeen = SpawnManager.GetAllSpawned().Count;
 		prevPos = this.transform.position;
@@ -44,7 +33,7 @@ public class HighlightBehavior : MonoBehaviour
 			prevNearest.SetHighlight(false);
 		}
 
-		GameObject nearest = SpawnManager.GetNearest(typeHighlighting, this.transform.position);
+		GameObject nearest = GetNearest();
 
 		// Not an error. Can happen if there are 0 spawns.
 		if (nearest == null) { return; }
@@ -55,4 +44,7 @@ public class HighlightBehavior : MonoBehaviour
 			prevNearest = hItem;
 		}
 	}
+
+	// Implementation override this.
+	public abstract GameObject GetNearest();
 }
