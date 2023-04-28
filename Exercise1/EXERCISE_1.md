@@ -1,4 +1,27 @@
-# Exercise 1 #
+# Information and Usage
+- All optional challenges implemented.
+- Project is in 2020.3.47f1
+- Playmode and Edit mode test are included.
+- Save file
+	- Press S during gameplay to save. 
+	- Save file is written to C:\Users\{user}\AppData\LocalLow\DefaultCompany\VirbelaExercise1RyanRothweiler
+	- Save file will be automatically loaded on start, if it exists. Delete file to prevent it from loading.
+	- Save file will save and load all HighlightItems. Even ones placed manually in the scene. This can result in duplicating objects if they're not deleted before loading. This is an improvement that could be made to the save system.
+- There are four radial spawners in the scene. 
+	- Two which spawn bots, and two which spawn items.
+	- All spawners will spawn on start.
+	- The first Bot spawner is setup to spawn a bot on pressing B.
+	- The first Item spawner is setup to spawn a bot on pressing I.
+- Highlight nearest options
+	- I implemented two ways to highlight.
+		- HighlightOneBehavior will highlight the nearest item or bot.
+		- HighlightTypeBehavior will highlight the nearest either item or bot as defined in a local spawnType variable.
+			- If spawnType is set to Bot, it will only highlight bots and never items.
+	- The Player prefab has one HighlightOneBehavior and two HighlightTypeBehaviors.
+		- By default the HighlightOneBehavior is enabled and the HighlightTypeBehaviors are both disabled. This setup will highlight the nearest item, be it item or bot doesn't matter, as defined by the exercise.
+		- If you disable the HighlightOneBehavior and enable the two HighlightTypeBehaviors, then the nearest Item AND the nearest bot will be highlighted. This was not requested by the exercise but I included it because it seemed like a fun extension.
+
+# Exercise 1
 
 In this exercise you'll configure a Unity scene and write scripts to create an interactive experience. As you progress through the steps, feel free to add comments to the code about *why* you choose to do things a certain way. Add comments if you felt like there's a better, but more time intensive way to implement specific functionality. It's OK to be more verbose in your comments than typical, to give us a better idea of your thoughts when writing the code.
 
@@ -54,9 +77,19 @@ Allow the designer to choose the base color and highlight color for Items/Bots a
 ## Questions ##
 
  1. How can your implementation be optimized?
- 1. How much time did you spend on your implementation?
- 1. What was most challenging for you?
- 1. What else would you add to this exercise?
+	- A KD tree datastructure is already quite fast , I'm not aware of other faster structures but I'm sure they exist. The KD implementation could be improved by adding balancing, and starting by inserting the center most point. Most of the optimization will be in reducing the set of points searched using other context. For example if the game has rooms then only search the points within the same room as the player. 
+ 2. How much time did you spend on your implementation?
+	 -  Total of 11.5 hours currently, as of writing. Likely another 0.5 hours to finish this documentation.
+		 - 2.5 hours for the nearest nighbor implementations of naive and KD tree.
+		 - 1 hour for test writing and setup
+		 - 2.5 hours to dependency injection work
+		 - 1 hour for spawning
+		 - 2 hours for highlight abstractions and two highlight methods
+		 - 2.5 hours for miscelaneous. Project setup, reading exercise, xml comments, etc
+ 3. What was most challenging for you?
+	 - The dependency injection. Its not something I'm very familiar with. I'm aware of it, but haven't used it in practice besides tinkering.
+ 4. What else would you add to this exercise?
+	 1. Possibly additional gameplay. Additions like collisions, scene changes, player input, and prefab setup might give additional insight.
 
 ## Optional ##
 
