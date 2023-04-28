@@ -36,6 +36,15 @@ public class SpawnManager : MonoBehaviour
 		}
 	}
 
+	public void Start()
+	{
+		// Add all highlight items currenlty existing in scene
+		HighlightItem[] existingItems = FindObjectsOfType<HighlightItem>();
+		for (int i = 0; i < existingItems.Length; i++) {
+			AddObject(existingItems[i].gameObject, existingItems[i].GetSpawnType());
+		}
+	}
+
 	/// <summary>
 	/// Adds a new spawn definition to the spawnDefinitions dictionary.
 	/// </summary>
@@ -85,17 +94,9 @@ public class SpawnManager : MonoBehaviour
 			return;
 		}
 
-		// Instantiate the object
+		// Instantiate the object and add
 		GameObject newObj = Instantiate(def.objPrefab, pos, Quaternion.identity, parent);
-
-		// Create storage if there isn't one
-		if (!allSpawns.ContainsKey(type)) {
-			allSpawns[type] = nearestBuilder.BuildImplementation();
-		}
-
-		// Add to storage
-		allSpawns[type].Add(newObj);
-		allObjects.Add(newObj);
+		AddObject(newObj, type);
 	}
 
 	/// <summary>
@@ -112,5 +113,23 @@ public class SpawnManager : MonoBehaviour
 		}
 
 		return allSpawns[type].FindNearest(origin);
+	}
+
+	/// <summary>
+	/// Add object to organzing structures
+	/// </summary>
+	/// <param name="obj">The object adding.</param>
+	/// <param name="type">The SpawnType to add.</param>
+	/// <returns>The nearest spawned object of the specified SpawnType, or null if none exist.</returns>
+	private static void AddObject(GameObject obj, SpawnType type)
+	{
+		// Create storage if there isn't one
+		if (!allSpawns.ContainsKey(type)) {
+			allSpawns[type] = nearestBuilder.BuildImplementation();
+		}
+
+		// Add to storage
+		allSpawns[type].Add(obj);
+		allObjects.Add(obj);
 	}
 }

@@ -27,26 +27,31 @@ public class HighlightItem : MonoBehaviour
 	// Do in awake so that other behaviors can use this. Also good practice to get components in awake
 	public void Awake()
 	{
+		// Get renderer and verify its there
 		rend = this.GetComponent<Renderer>();
-		def = SpawnManager.GetSpawnItemDefinition(type);
-
-		// A bit more safety. These are required for this to function
 		if (rend == null) {
 			Debug.LogError("Missing required renderer.");
-			this.enabled = false;
-		}
-		if (def == null) {
-			Debug.LogError("Missing required spawn item definition.");
-			this.enabled = false;
-		}
-		if (!rend.material.HasProperty(def.materialColorProperty)) {
-			Debug.LogError($"Material missing required property {def.materialColorProperty}");
 			this.enabled = false;
 		}
 	}
 
 	public void Start()
 	{
+		// Get item definition
+		def = SpawnManager.GetSpawnItemDefinition(type);
+
+		// Verify data
+		if (def == null) {
+			Debug.LogError("Missing required spawn item definition.");
+			this.enabled = false;
+			return;
+		}
+		if (!rend.material.HasProperty(def.materialColorProperty)) {
+			Debug.LogError($"Material missing required property {def.materialColorProperty}");
+			this.enabled = false;
+			return;
+		}
+
 		rend.material.SetColor(def.materialColorProperty, def.baseColor);
 		currColor = def.baseColor;
 	}
