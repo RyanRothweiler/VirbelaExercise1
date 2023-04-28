@@ -78,7 +78,7 @@ public class SaveManager : MonoBehaviour
 		// TODO use newtonsoft or .NET json utilities. They're better than Unity's.
 		string asJson = JsonUtility.ToJson(file);
 		// TODO write this async
-		// TODO encrypt save file so players don't manually 'fix' it
+		// TODO encrypt save file so players don't manually change it
 		File.WriteAllText(filePath, asJson);
 		Debug.Log($"Save file {filePath}");
 	}

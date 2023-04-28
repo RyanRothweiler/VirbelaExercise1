@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Base class for highlighting behavior of GameObjects.
+/// </summary>
 public abstract class HighlightBehaviorBase : MonoBehaviour
 {
 	private Vector3 prevPos;
 	private int countSeen;
-
-	protected HighlightItem prevNearest;
+	private HighlightItem prevNearest;
 
 	void Start()
 	{
@@ -24,6 +26,9 @@ public abstract class HighlightBehaviorBase : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Highlights the nearest GameObject.
+	/// </summary>
 	public void Highlight()
 	{
 		countSeen = SpawnManager.GetAllSpawned().Count;
@@ -45,6 +50,9 @@ public abstract class HighlightBehaviorBase : MonoBehaviour
 		}
 	}
 
-	// Implementation override this.
+	/// <summary>
+	/// Returns the nearest GameObject. Implementation must override this.
+	/// </summary>
+	/// <returns>The nearest GameObject.</returns>
 	public abstract GameObject GetNearest();
 }

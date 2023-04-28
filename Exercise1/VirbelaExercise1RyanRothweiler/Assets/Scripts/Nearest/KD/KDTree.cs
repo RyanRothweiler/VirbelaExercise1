@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// This is not a generalized kdtree. This assumes three dimensions. No balancing, etc
+/// Basic KD Tree implementation.
+/// Find in O(log(n)) average
+/// This is not a generalized kdtree. This assumes three dimensions, has no balancing, etc
 /// </summary>
 public class KDTree : IGetNearest
 {
@@ -30,17 +32,17 @@ public class KDTree : IGetNearest
 	{
 		// validation
 		if (newNode.obj == null) {
-			Debug.LogError("Attempting to add empty obj to kd tre");
+			Debug.LogError("Attempting to add empty object.");
 			return;
 		}
 
-		// start with root if we don't have one
+		// Start with root if we don't have one.
 		if (root == null) {
 			root = newNode;
 			return;
 		}
 
-		// add to tree
+		// Add to tree.
 		KDNode current = root;
 		int dimension = 0;
 		while (true) {

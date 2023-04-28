@@ -40,7 +40,7 @@ public class SpawnManager : MonoBehaviour
 
 	public void Start()
 	{
-		// Add all highlight items currenlty existing in scene
+		// Add all highlight items currently existing in scene
 		HighlightItem[] existingItems = FindObjectsOfType<HighlightItem>();
 		for (int i = 0; i < existingItems.Length; i++) {
 			AddObject(existingItems[i].gameObject, existingItems[i].GetSpawnType());
@@ -149,7 +149,7 @@ public class SpawnManager : MonoBehaviour
 			allSpawns = nearestBuilder.BuildImplementation();
 		}
 
-		// Add to storage
+		// Add to storage. This maybe could be improved to use one storage type for all needs.
 		allSpawns.Add(obj);
 		spawnsByType[type].Add(obj);
 		allObjects.Add(obj);
